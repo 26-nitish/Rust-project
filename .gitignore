@@ -1,0 +1,4 @@
+# Ignore Cargo artifacts
+target/
+Cargo.lock
+
