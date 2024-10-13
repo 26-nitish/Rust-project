@@ -1,0 +1,33 @@
+@startuml
+title Decoding Process in CovertSight
+
+actor User
+participant "Web Browser" as Browser
+participant "Backend Server" as Server
+participant "Steganography Handler" as StegoHandler
+participant "Decryption Handler" as DecryptHandler
+
+User -> Browser: Access "Decode" Page
+Browser -> User: Display Decode Form
+User -> Browser: Upload Stego Image,\n(Optional) Enter Password
+Browser -> Server: POST /decode\nwith stego image, [password]
+activate Server
+
+Server -> StegoHandler: Extract message\nfrom image
+activate StegoHandler
+StegoHandler --> Server: Extracted message
+deactivate StegoHandler
+
+alt Password Provided
+    Server -> DecryptHandler: Decrypt message
+    activate DecryptHandler
+    DecryptHandler --> Server: Plaintext message
+    deactivate DecryptHandler
+end
+
+Server --> Browser: Plaintext Message
+deactivate Server
+
+Browser --> User: Display Secret Message
+
+@enduml

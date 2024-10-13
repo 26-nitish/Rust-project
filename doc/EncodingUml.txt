@@ -1,0 +1,32 @@
+@startuml
+title Encoding Process in CovertSight
+
+actor User
+participant "Web Browser" as Browser
+participant "Backend Server" as Server
+participant "Encryption Handler" as EncryptHandler
+participant "Steganography Handler" as StegoHandler
+
+User -> Browser: Access "Encode" Page
+Browser -> User: Display Encode Form
+User -> Browser: Upload Image,\nEnter Message,\n(Optional) Enter Password
+Browser -> Server: POST /encode\nwith image, message, [password]
+activate Server
+
+alt Password Provided
+    Server -> EncryptHandler: Encrypt message
+    activate EncryptHandler
+    EncryptHandler --> Server: Encrypted message
+    deactivate EncryptHandler
+end
+
+Server -> StegoHandler: Embed (encrypted) message\ninto image
+activate StegoHandler
+StegoHandler --> Server: Stego Image
+deactivate StegoHandler
+
+Server --> Browser: Stego Image File
+deactivate Server
+
+Browser --> User: Prompt to Download\nStego Image
+@enduml

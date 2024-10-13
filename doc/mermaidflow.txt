@@ -1,0 +1,73 @@
+flowchart TD
+    %% Define custom styles using the provided color palette
+    %% User Nodes: White background with black text
+    classDef userStyle fill:#FFFFFF,stroke:#000000,stroke-width:2px,color:#000000;
+    %% Process Nodes: Light Gray background with black text
+    classDef processStyle fill:#E5E5E5,stroke:#000000,stroke-width:2px,color:#000000;
+    %% Module Nodes: Dark Blue background with white text
+    classDef moduleStyle fill:#14213D,stroke:#000000,stroke-width:2px,color:#FFFFFF,font-size:14px;
+    %% Output Nodes: Orange background with black text
+    classDef outputStyle fill:#FCA311,stroke:#000000,stroke-width:2px,color:#000000;
+    linkStyle default stroke:#000000,stroke-width:1px;
+
+    %% User Nodes: White background with black text
+    classDef covertStyle font-size:16px;
+
+    %% Encoding Process
+    A[Alice 🔑] -->|Image 🖼️ and Secret 📨| R
+    class A userStyle
+    class R covertStyle
+
+
+    C[Backend Server]
+    class C processStyle
+
+    C -->|Encrypts Message<br/>If Password Provided| D[🔒 Encryption Module]
+    class D moduleStyle
+
+    D --> E[Steganography Module]
+    class E moduleStyle
+
+    C -->|If No Password| E
+
+    E -->|Embeds Message into Image| F[Stego Image]
+    class F outputStyle
+
+    F --> G[User Downloads Stego Image 🖼️🖃]
+    class G userStyle
+
+    subgraph R[CovertSight 👁️ Embed<br/>]
+        C
+        D
+        E
+        F
+    end
+
+    %% Decoding Process
+    W[Bob 🔑] -->|Uploads Stego Image 🖼️🖃| Z
+    class W userStyle
+    class Z covertStyle
+
+    I[Backend Server]
+    class I processStyle
+
+    I --> J[Steganography Module]
+    class J moduleStyle
+
+    J -->|Extracts Message| K[🔒 Decryption Module]
+    class K moduleStyle
+
+    K -->|Decrypts Message<br/>If Password Provided| L[Secret Message]
+    class L outputStyle
+
+    I -->|If No Password| L
+
+    L --> M[User Reads Secret 📩]
+    class M userStyle
+
+    subgraph Z[CovertSight 👁️ Extract<br/>]
+        I
+        J
+        K
+        L
+    end
