@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Encode Message - CovertSight</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="assets/logo.png" alt="CovertSight Logo" class="logo"></a>
+        <nav>
+            <ul>
+                <li><a href="encode.html" class="active">Encode</a></li>
+                <li><a href="decode.html">Decode</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="encode-section">
+            <h2>Encode a Secret Message</h2>
+            <form id="encodeForm">
+                <label for="image">Select Image:</label>
+                <input type="file" id="image" name="image" accept="image/png, image/jpeg" required>
+
+                <label for="message">Secret Message:</label>
+                <textarea id="message" name="message" placeholder="Enter your secret message here..." required></textarea>
+
+                <label for="password">Password (Optional):</label>
+                <input type="password" id="password" name="password" placeholder="Enter a password to encrypt your message">
+
+                <button type="submit">Encode Message</button>
+            </form>
+            <div id="result" class="hidden">
+                <h3>Stego Image Ready</h3>
+                <a id="downloadLink" href="#" download="stego_image.png">Download Stego Image</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 CovertSight. All rights reserved.</p>
+    </footer>
+    <script src="js/encode.js"></script>
+</body>
+</html>
