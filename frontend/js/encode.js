@@ -16,21 +16,25 @@ document.getElementById('encodeForm').addEventListener('submit', async function(
     if (password) {
         formData.append('password', password);
     }
+    console.log(formData);
 
     try {
-        const response = await fetch('http://localhost:8080/encode', {
+        const response = await fetch('http://localhost:3333/encode', {
             method: 'POST',
             body: formData
         });
+        console.log(response);
 
         if (response.ok) {
             const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
+            const url = URL.createObjectURL(blob);
 
             const downloadLink = document.getElementById('downloadLink');
             downloadLink.href = url;
             downloadLink.download = 'stego_image.png';
-
+        
+            // Write prints for debugging
+            console.log(response);
             document.getElementById('result').classList.remove('hidden');
         } else {
             const errorText = await response.text();

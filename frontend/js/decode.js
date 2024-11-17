@@ -16,7 +16,7 @@ document.getElementById('decodeForm').addEventListener('submit', async function(
     }
 
     try {
-        const response = await fetch('http://localhost:8080/decode', {
+        const response = await fetch('http://localhost:3333/decode', {
             method: 'POST',
             body: formData
         });
